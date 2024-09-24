@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import ReactNiceAvatar, { genConfig } from 'react-nice-avatar'
+import { useAppDispatch } from '../hooks/redux-hooks.ts'
+import { removeComment } from '../redux/slices/commentSlice.ts'
 
 interface User {
     id: number
@@ -16,7 +18,9 @@ interface CommentCardProps {
 }
 
 const CommentCard: React.FC<CommentCardProps> = ({ likes, user, body, postId, id }) => {
-    const config = genConfig()
+    const config = useMemo(() => {
+        return genConfig({ sex: 'man', bgColor: 'blue' })
+    }, [])
 
     const [showMenu, setShowMenu] = useState<number | null>(null)
 
@@ -28,9 +32,10 @@ const CommentCard: React.FC<CommentCardProps> = ({ likes, user, body, postId, id
         }
     }
 
-    const handleDelete = (id: number) => {
-        console.log(`Comment with ID ${id} is deleted.`)
-        setShowMenu(null)
+    const dispatch = useAppDispatch()
+
+    const handleDelete = (commentId: number) => {
+        dispatch(removeComment(commentId))
     }
 
     return (
@@ -59,9 +64,9 @@ const CommentCard: React.FC<CommentCardProps> = ({ likes, user, body, postId, id
                 </button>
 
                 {showMenu === id && (
-                    <div className="absolute top-1 right-0 mt-2 bg-white border rounded-lg shadow-lg w-24 z-20">
+                    <div className="absolute top-1.5 right-1 bg-white border rounded-lg shadow-lg w-20 z-20">
                         <button
-                            className="block w-full text-left px-4 py-2 hover:bg-red-100 text-red-600"
+                            className="block w-full px-1 py-1 hover:bg-red-100 text-red-600"
                             onClick={() => handleDelete(id)}
                         >
                             Delete
