@@ -15,8 +15,6 @@
     "jsx": "react-jsx",
     "types": [
       "vite/client",
-      "node",
-      "chrome",
       "@testing-library/jest-dom/vitest",
       "vitest/globals"
     ],
