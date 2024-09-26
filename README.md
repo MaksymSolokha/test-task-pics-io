@@ -47,13 +47,13 @@ To run the application in your local environment, follow these steps:
 To run the tests, use the command:
 
 ```bash
-yarn test
+yarn run test
 ```
 
 To check coverage:
 
 ```bash
-yarn test:coverage
+yarn run test:coverage
 ```
 
 ## Deployment
