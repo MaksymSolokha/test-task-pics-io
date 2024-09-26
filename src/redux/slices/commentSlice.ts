@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export interface CommentState {
-    comments: Comment[]
+export interface CommentsState {
+    comments: CommentState[]
     total: number
     skip: number
     limit: number
 }
 
-export interface Comment {
+export interface CommentState {
     id: number
     body: string
     postId: number
@@ -23,7 +23,7 @@ export interface User {
 }
 
 interface initialStateType {
-    data: CommentState | null
+    data: CommentsState | null
     loading: boolean
 }
 
@@ -35,7 +35,7 @@ const initialState: initialStateType = {
 // Асинхронна функція для завантаження коментарів з API
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
     try {
-        const response = await axios.get<CommentState>('https://dummyjson.com/comments')
+        const response = await axios.get<CommentsState>('https://dummyjson.com/comments')
         return response.data
     } catch (err) {
         throw new Error('Failed to fetch comments')
@@ -55,7 +55,7 @@ const commentsSlice = createSlice({
                 localStorage.setItem('comments', JSON.stringify(state.data)) // Оновлюємо localStorage
             }
         },
-        addComment: (state, action: PayloadAction<Comment>) => {
+        addComment: (state, action: PayloadAction<CommentState>) => {
             if (state.data) {
                 state.data.comments.unshift(action.payload)
                 state.data.total += 1
@@ -69,7 +69,7 @@ const commentsSlice = createSlice({
                 state.data = { comments: [], total: 0, skip: 0, limit: 0 }
                 state.loading = true
             })
-            .addCase(fetchComments.fulfilled, (state, action: PayloadAction<CommentState>) => {
+            .addCase(fetchComments.fulfilled, (state, action: PayloadAction<CommentsState>) => {
                 state.data = action.payload
                 state.loading = false
                 localStorage.setItem('comments', JSON.stringify(state.data)) // Зберігаємо у localStorage після завантаження
