@@ -1,50 +1,69 @@
-# React + TypeScript + Vite
+Here’s the translated README in English:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Comments Application
 
-Currently, two official plugins are available:
+This is a simple application for creating and deleting comments, developed using React, Redux, and TypeScript. The application fetches a list of comments from the [DummyJSON API](https://dummyjson.com/comments) and allows users to add new comments and delete existing ones.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Overview
 
-## Expanding the ESLint configuration
+- **Technologies:** React, Redux, TypeScript, Vite
+- **Testing:** Vitest
+- **Package Management:** Yarn
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- Loading the list of comments when the application starts.
+- Adding new comments.
+- Deleting any comments.
+- Preserving state upon page reload (scroll position, text in input fields).
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Installation
+
+To run the application in your local environment, follow these steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/MaksymSolokha/test-task-pics-io.git
+   cd test-task-pics-io
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   yarn install
+   ```
+
+3. Start the application:
+
+   ```bash
+   yarn run dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173` (or the address indicated in the console).
+
+## Testing
+
+To run the tests, use the command:
+
+```bash
+yarn test
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+To check coverage:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+yarn test:coverage
 ```
+
+## Deployment
+
+The application is deployed on [Vercel](https://vercel.com/) at: [https://test-task-pics-io.vercel.app](https://test-task-pics-io.vercel.app). By simply connecting your repository, you can see updates in real time.
+
+## Evaluation of the Solution
+
+- **Codebase:** Easily understandable project structure and organization of the code.
+- **Performance:** Optimization is used for loading and rendering.
+- **Usability:** User-friendly interface.
+- **User Experience:** Ease of use with intuitive design.
+- **Maintainability:** Clear documentation and tests.
