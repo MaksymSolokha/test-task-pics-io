@@ -28,15 +28,15 @@ interface initialStateType {
 }
 
 const initialState: initialStateType = {
-    data: JSON.parse(localStorage.getItem('comments') || 'null'), // Відновлюємо з localStorage
+    data: JSON.parse(localStorage.getItem('comments') || 'null'),
     loading: false,
 }
 
-// Асинхронна функція для завантаження коментарів з API
 export const fetchComments = createAsyncThunk('comments/fetchComments', async () => {
     try {
         const response = await axios.get<CommentsState>('https://dummyjson.com/comments')
         return response.data
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
         throw new Error('Failed to fetch comments')
     }
@@ -51,16 +51,20 @@ const commentsSlice = createSlice({
                 state.data.comments = state.data.comments.filter(
                     (comment) => comment.id !== action.payload
                 )
-                state.data.total -= 1 // Зменшуємо загальну кількість коментарів
-                localStorage.setItem('comments', JSON.stringify(state.data)) // Оновлюємо localStorage
+                state.data.total -= 1
+                localStorage.setItem('comments', JSON.stringify(state.data))
             }
         },
         addComment: (state, action: PayloadAction<CommentState>) => {
             if (state.data) {
                 state.data.comments.unshift(action.payload)
                 state.data.total += 1
-                localStorage.setItem('comments', JSON.stringify(state.data)) // Оновлюємо localStorage
+                localStorage.setItem('comments', JSON.stringify(state.data))
             }
+        },
+        importState: (state, action: PayloadAction<CommentsState>) => {
+            state.data = action.payload
+            localStorage.setItem('comments', JSON.stringify(state.data))
         },
     },
     extraReducers: (builder) => {
@@ -81,5 +85,5 @@ const commentsSlice = createSlice({
     },
 })
 
-export const { removeComment, addComment } = commentsSlice.actions
+export const { removeComment, addComment, importState } = commentsSlice.actions
 export default commentsSlice.reducer
