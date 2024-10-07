@@ -6,6 +6,7 @@ import Comment from './components/Comment.tsx'
 import Input from './components/Input.tsx'
 import Skeleton from './components/Skeleton.tsx'
 import CommentsNotFound from './components/CommentsNotFound.tsx'
+import FileManagementControl from './components/FileManagementControl.tsx'
 
 function App() {
     const dispatch = useAppDispatch()
@@ -60,6 +61,7 @@ function App() {
                     <h3 className="font-semibold text-lg">All Comments: {data?.total || 0}</h3>
                 </div>
                 <Input />
+                <FileManagementControl />
                 {renderComments()}
             </div>
         </div>
