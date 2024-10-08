@@ -29,7 +29,13 @@ const FileManagementControl = () => {
                 Export State
             </button>
 
-            <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileChange} />
+            <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                onChange={handleFileChange}
+                accept=".json"
+            />
 
             <button
                 className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
